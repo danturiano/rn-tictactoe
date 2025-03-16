@@ -1,13 +1,20 @@
-import { ScreenContent } from 'components/ScreenContent';
-import { StatusBar } from 'expo-status-bar';
-
+import Cell from 'components/Cell';
+import { Container } from 'components/Container';
+import { useState } from 'react';
+import { View } from 'react-native';
 import './global.css';
 
 export default function App() {
+  const defaultBoard = [null, null, null, null, null, null, null, null, null];
+  const [board, setBoard] = useState(defaultBoard);
+
   return (
-    <>
-      <ScreenContent title="Home" path="App.tsx" />
-      <StatusBar style="auto" />
-    </>
+    <Container>
+      <View className="w-96 flex-row flex-wrap">
+        {board.map((cell, index) => (
+          <Cell value={index} />
+        ))}
+      </View>
+    </Container>
   );
 }
