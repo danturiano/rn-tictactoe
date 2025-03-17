@@ -29,29 +29,27 @@ export default function GameProvider({ children }: { children: React.ReactNode }
     playerTwo = [];
     setBoard(defaultBoard);
     setIsGameOver(false);
+    setCurrentPlayer('playerOne');
     setToken('X');
   };
 
-  const onPressHandler = (index: number) => {
-    if (currentPlayer === 'playerOne') {
-      playerOne.push(index);
-      const hasMatch = checkPatternMatch(playerOne);
-      if (hasMatch) {
-        console.log(`${currentPlayer} Winner!`);
-        setIsGameOver(true);
-      }
-    } else {
-      playerTwo.push(index);
-      checkPatternMatch(playerTwo);
-      const hasMatch = checkPatternMatch(playerTwo);
-      if (hasMatch) {
-        console.log(`${currentPlayer} Winner!`);
-        setIsGameOver(true);
-      }
+  const handlePlayerMove = (index: number) => {
+    const playerMoves = currentPlayer === 'playerOne' ? playerOne : playerTwo;
+    playerMoves.push(index);
+
+    if (checkPatternMatch(playerMoves)) {
+      console.log(`${currentPlayer} Winner!`);
+      setIsGameOver(true);
+      return;
     }
+
+    setCurrentPlayer(currentPlayer === 'playerOne' ? 'playerTwo' : 'playerOne');
+  };
+
+  const onPressHandler = (index: number) => {
+    handlePlayerMove(index);
     setBoard((cells) => cells.map((cell, i) => (i === index ? token : cell)));
     setToken((prev) => (prev === 'X' ? 'O' : 'X'));
-    setCurrentPlayer((prev) => (prev === 'playerOne' ? 'playerTwo' : 'playerOne'));
   };
 
   return (

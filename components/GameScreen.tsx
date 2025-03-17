@@ -17,7 +17,13 @@ export default function GameScreen({ setScreen }: { setScreen: (screen: string) 
       {isGameOver && (
         <View className="border">
           <Button title="Reset Game" onPress={resetGame} />
-          <Button title="End Game" onPress={() => setScreen('home')} />
+          <Button
+            title="End Game"
+            onPress={() => {
+              setScreen('home');
+              resetGame();
+            }}
+          />
         </View>
       )}
     </Container>
