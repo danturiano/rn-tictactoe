@@ -1,17 +1,19 @@
 import { Pressable, Text } from 'react-native';
 
+import { useGame } from './GameProvider';
+
 type CellProps = {
   value: string | null;
   index: number;
-  isGameOver: boolean;
-  pressHandler: (index: number) => void;
 };
 
-export default function Cell({ value, index, isGameOver, pressHandler }: CellProps) {
+export default function Cell({ value, index }: CellProps) {
+  const { isGameOver, onPressHandler } = useGame();
+
   return (
     <Pressable
       className={styles.cell}
-      onPress={() => pressHandler(index)}
+      onPress={() => onPressHandler(index)}
       disabled={value !== null || isGameOver}>
       <Text>{value}</Text>
     </Pressable>
