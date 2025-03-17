@@ -6,15 +6,18 @@ Tic-Tac-Toe is a React Native Expo app that allows two players to play the class
 
 ### 1. Home Screen
 
-User can press "Play" to start the game.
 ![Home Screen](./assets/ss1.png)
+
+User can press "Play" to start the game.
 
 ### 2. Game Screen
 
-User can start playing by pressing the cells.
 ![Game Screen](./assets/ss2.png)
+
+User can start playing by pressing the cells.
 
 ### 3. End Screen
 
-User can choose to play again or end the game.
 ![End Screen](./assets/ss3.png)
+
+User can choose to play again or end the game.
