@@ -1,9 +1,22 @@
-import { Text, View } from 'react-native';
+import { Pressable, Text } from 'react-native';
 
-export default function Cell({ value }: { value: number }) {
+type CellProps = {
+  value: string | null;
+  index: number;
+  pressHandler: (index: number) => void;
+};
+
+export default function Cell({ value, index, pressHandler }: CellProps) {
   return (
-    <View className="h-32 w-32 border">
+    <Pressable
+      className={styles.cell}
+      onPress={() => pressHandler(index)}
+      disabled={value !== null}>
       <Text>{value}</Text>
-    </View>
+    </Pressable>
   );
 }
+
+const styles = {
+  cell: 'flex h-32 w-32 items-center justify-center border',
+};
