@@ -1,9 +1,8 @@
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
-import Cell from './Cell';
-import { Container } from './Container';
-import { useGame } from './GameProvider';
 import Btn from './Btn';
+import Cell from './Cell';
+import { useGame } from './GameProvider';
 
 export default function GameScreen({ setScreen }: { setScreen: (screen: string) => void }) {
   const { board, isGameOver, resetGame, token } = useGame();
@@ -23,7 +22,7 @@ export default function GameScreen({ setScreen }: { setScreen: (screen: string) 
       </View>
       {isGameOver && (
         <View className="w-full gap-2">
-          <Btn title="Reset Game" onPress={() => resetGame()} />
+          <Btn title="Play Again" onPress={() => resetGame()} />
           <Btn
             title="End Game"
             onPress={() => {

@@ -1,5 +1,4 @@
-import React from 'react';
-import { Button, View } from 'react-native';
+import { Pressable, Text } from 'react-native';
 
 type BtnProps = {
   title: string;
@@ -8,8 +7,10 @@ type BtnProps = {
 
 export default function Btn({ title, onPress }: BtnProps) {
   return (
-    <View className="rounded-3xl border border-white p-2">
-      <Button title={title} onPress={() => onPress()} color="#ffffff" />
-    </View>
+    <Pressable
+      onPress={() => onPress()}
+      className="rounded-3xl border border-white bg-transparent p-4">
+      <Text className="text-center text-white">{title}</Text>
+    </Pressable>
   );
 }
