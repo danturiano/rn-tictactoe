@@ -5,5 +5,5 @@ export const Container = ({ children }: { children: React.ReactNode }) => {
 };
 
 const styles = {
-  container: 'flex flex-1 m-6 justify-center items-center',
+  container: 'flex flex-1 bg-[#0B192C] justify-center items-center',
 };

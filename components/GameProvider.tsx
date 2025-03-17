@@ -6,6 +6,7 @@ type GameContextType = {
   isGameOver: boolean;
   onPressHandler: (index: number) => void;
   resetGame: () => void;
+  token: string;
 };
 
 let playerOne: number[] = [];
@@ -48,12 +49,12 @@ export default function GameProvider({ children }: { children: React.ReactNode }
 
   const onPressHandler = (index: number) => {
     handlePlayerMove(index);
-    setBoard((cells) => cells.map((cell, i) => (i === index ? token : cell)));
     setToken((prev) => (prev === 'X' ? 'O' : 'X'));
+    setBoard((cells) => cells.map((cell, i) => (i === index ? token : cell)));
   };
 
   return (
-    <GameContext.Provider value={{ board, onPressHandler, resetGame, isGameOver }}>
+    <GameContext.Provider value={{ board, onPressHandler, resetGame, isGameOver, token }}>
       {children}
     </GameContext.Provider>
   );
