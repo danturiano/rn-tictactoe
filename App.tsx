@@ -1,7 +1,7 @@
 import Cell from 'components/Cell';
 import { Container } from 'components/Container';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { Button, View } from 'react-native';
 import './global.css';
 
 let playerOne: number[] = [];
@@ -35,6 +35,7 @@ export default function App() {
     playerTwo = [];
     setBoard(defaultBoard);
     setIsGameOver(false);
+    setToken('X');
   };
 
   const onPressHandler = (index: number) => {
@@ -48,7 +49,7 @@ export default function App() {
     } else {
       playerTwo.push(index);
       checkPatternMatch(playerTwo);
-      const hasMatch = checkPatternMatch(playerOne);
+      const hasMatch = checkPatternMatch(playerTwo);
       if (hasMatch) {
         console.log(`${currentPlayer} Winner!`);
         setIsGameOver(true);
@@ -72,6 +73,11 @@ export default function App() {
           />
         ))}
       </View>
+      {isGameOver && (
+        <View className="border">
+          <Button title="Reset Game" onPress={resetGame} />
+        </View>
+      )}
     </Container>
   );
 }
