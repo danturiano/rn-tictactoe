@@ -1,5 +1,5 @@
 import { winningPattern } from 'constants/constants';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 type GameContextType = {
   board: (string | null)[];
@@ -25,6 +25,13 @@ export default function GameProvider({ children }: { children: React.ReactNode }
   const defaultBoard: (string | null)[] = Array(9).fill(null);
   const [board, setBoard] = useState<(string | null)[]>(defaultBoard);
 
+  useEffect(() => {
+    const playerMoves = currentPlayer === 'playerOne' ? playerTwo : playerOne;
+    if (playerMoves.length > 2 && checkPatternMatch(playerMoves)) {
+      setIsGameOver(true);
+    }
+  }, [currentPlayer]);
+
   const resetGame = () => {
     playerOne = [];
     playerTwo = [];
@@ -37,13 +44,6 @@ export default function GameProvider({ children }: { children: React.ReactNode }
   const handlePlayerMove = (index: number) => {
     const playerMoves = currentPlayer === 'playerOne' ? playerOne : playerTwo;
     playerMoves.push(index);
-
-    if (checkPatternMatch(playerMoves)) {
-      console.log(`${currentPlayer} Winner!`);
-      setIsGameOver(true);
-      return;
-    }
-
     setCurrentPlayer(currentPlayer === 'playerOne' ? 'playerTwo' : 'playerOne');
   };
 
